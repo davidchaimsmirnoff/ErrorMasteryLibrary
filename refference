@@ -14,9 +14,9 @@ To do this through error-based mastery, you'll need to intentionally cause & fix
 🔌 1. Socket & Port Errors (5 errors)
 #	Error	What You Learn
 
-1	ConnectionRefusedError: [WinError 10061]	No server is listening on that port
+1	ConnectionRefusedError: [WinError 10061]	No server is listening on that port ✔️
 
-2	OSError: [WinError 10048] Only one usage of each socket address	Port already in use
+2	OSError: [WinError 10048] Only one usage of each socket address	Port already in use 
 
 3	socket.timeout	What happens if server is slow or absent
 4	OSError: [WinError 10049]	Trying to bind to invalid IP
