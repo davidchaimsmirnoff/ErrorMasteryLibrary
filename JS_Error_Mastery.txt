@@ -162,15 +162,25 @@ These are the most fundamental, recurring error patterns that every developer ru
 
 These are parsing errors — they prevent your code from running.
 	1.	let x; let x;
-→ ❌ Duplicate declaration
+→ ❌ Duplicate declaration ✅
+
+
 	2.	await fetch(...) (outside async)
-→ ❌ await only valid in async function
+→ ❌ await only valid in async function ✅
+
+
 	3.	return outside function
-→ ❌ Illegal return statement
+→ ❌ Illegal return statement ✅
+
+
 	4.	Missing bracket/parenthesis { or )
-→ ❌ Unexpected token
+→ ❌ Unexpected token ✅
+
+
 	5.	Unclosed string
 → ❌ Unterminated string constant
+
+
 	6.	Arrow function misformatted
 → let f = => 5; → ❌ Unexpected token ‘=>’
 	7.	Invalid variable name
