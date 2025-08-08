@@ -19,6 +19,8 @@ To do this through error-based mastery, you'll need to intentionally cause & fix
 2	OSError: [WinError 10048] Only one usage of each socket address	Port already in use ✔️
 
 3	socket.timeout	What happens if server is slow or absent
+
+
 4	OSError: [WinError 10049]	Trying to bind to invalid IP
 5	TypeError: AF_INET address must be a pair	Socket expects a (host, port) tuple
 
