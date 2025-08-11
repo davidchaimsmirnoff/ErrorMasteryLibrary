@@ -1,0 +1,192 @@
+Love this. Here’s a bug‑dojo: a staged set of errors to intentionally create, then fix. Each one boots a specific piece of “deeper” knowledge just by solving it. Do them in order.
+
+Lab 1 — Voice I/O Basics (foundation)
+Goal: mic → STT → TTS loop in Expo.
+
+Wrong locale (en-US instead of he-IL)
+• Simulate: hardcode wrong locale.
+• Fix: pass he-IL.
+• You learn: model/locale selection, why WER explodes without it.
+
+Clipped audio / wrong sample rate
+• Simulate: record at 8kHz or boost input gain.
+• Fix: match STT model sample rate; normalize levels.
+• You learn: audio pipelines, sample rates, dynamic range.
+
+Echo feedback (TTS feeding STT)
+• Simulate: start listening while TTS plays.
+• Fix: pause STT during playback or add AEC/ducking.
+• You learn: full‑duplex audio, echo control, barge‑in prerequisites.
+
+Mic permission denial
+• Simulate: deny permission on device.
+• Fix: request/handle gracefully, fallback UI.
+• You learn: mobile permission lifecycles (iOS/Android).
+
+Frozen UI when recording
+• Simulate: do recording on JS thread only.
+• Fix: move heavy work off main thread; debounce state.
+• You learn: RN threading, responsiveness, frame budget.
+
+Exit check: Say a Hebrew phrase, get a TTS reply, no echo, no jank.
+
+Lab 2 — Streaming & Turn‑Taking (real‑time feel)
+Goal: low‑latency conversation with barge‑in.
+
+Serialize pipeline (slow)
+• Simulate: wait for full STT → LLM → full TTS, then play.
+• Fix: stream partials; start TTS on first chunk.
+• You learn: streaming protocols, latency budget.
+
+No barge‑in (can’t interrupt TTS)
+• Simulate: TTS cannot be stopped.
+• Fix: cancellation tokens; stop audio on VAD speech start.
+• You learn: cooperative cancellation, race handling.
+
+Double start/stop of recorder
+• Simulate: rapid taps on PTT button.
+• Fix: idempotent state machine.
+• You learn: finite‑state design, debouncing.
+
+Partial vs final transcript mishandled
+• Simulate: treat partial as final, update score too early.
+• Fix: gate logic on is_final, keep hypotheses separate.
+• You learn: streaming STT semantics.
+
+Timeouts & retries
+• Simulate: throttle network; drop WebSocket mid‑turn.
+• Fix: exponential backoff, resume session IDs.
+• You learn: reliability patterns.
+
+Exit check: ≤700ms to first audio, smooth interrupt, zero stuck states.
+
+Lab 3 — Hebrew/RTL & Text Normalization (linguistic muscle)
+Goal: robust matching for learners.
+
+Over‑strict string match
+• Simulate: require exact spelling with niqqud.
+• Fix: normalize (NFC/NFD), strip diacritics, case‑fold, Levenshtein threshold.
+• You learn: normalization, fuzzy scoring.
+
+Morphology/lemma mismatch
+• Simulate: mark “wrong” for inflected correct forms.
+• Fix: lemmatize or whitelist acceptable variants.
+• You learn: basic NLP for Semitic morphology.
+
+RTL layout chaos
+• Simulate: mix English + Hebrew in a TextInput.
+• Fix: set writingDirection="rtl", proper fonts.
+• You learn: bidi/RTL rendering.
+
+Font missing niqqud
+• Simulate: choose a font without diacritics.
+• Fix: install a Hebrew font that supports niqqud.
+• You learn: font feature support, fallback strategy.
+
+Punctuation breaks compare
+• Simulate: commas/nikud differ between sources.
+• Fix: strip/normalize punctuation before scoring.
+• You learn: canonicalization pipeline.
+
+Exit check: Learner says variants; you score fairly and display clean RTL.
+
+Lab 4 — Game State, Scoring & UX (product behavior)
+Goal: durable progress + fair feedback.
+
+State race on unmount
+• Simulate: navigate away mid‑turn → setState after unmount.
+• Fix: guards + abort controllers.
+• You learn: RN lifecycle hygiene.
+
+Timers not cleared
+• Simulate: hints firing after screen change.
+• Fix: cleanup in useEffect returns.
+• You learn: timer ownership.
+
+Strict pass/fail frustration
+• Simulate: fail learners for tiny phoneme slips.
+• Fix: probabilistic rubric (WER threshold + phoneme hints).
+• You learn: UX for pedagogy.
+
+Progress lost on reload
+• Simulate: dev reload wipes achievements.
+• Fix: persist to SecureStore/SQLite; migration.
+• You learn: persistence patterns.
+
+Cold‑start confusion
+• Simulate: drop user into complex quest.
+• Fix: onboarding script, first 5‑minute win loop.
+• You learn: funnel design.
+
+Exit check: Close and reopen app; continue exactly where you left off.
+
+Lab 5 — Networking, Auth & Privacy (production survival)
+Goal: stable sessions that respect users.
+
+Token expiry mid‑stream
+• Simulate: short‑lived tokens; expire during turn.
+• Fix: refresh pre‑emptively; atomic swap on sockets.
+• You learn: auth lifecycles.
+
+Rate limits & retry storms
+• Simulate: hit free tier limits.
+• Fix: jittered backoff, circuit breaker, user messaging.
+• You learn: resilience.
+
+Clock skew
+• Simulate: device time off by 2 minutes.
+• Fix: server time sync or leeway in signatures.
+• You learn: distributed time pitfalls.
+
+Offline mode
+• Simulate: airplane mode mid‑turn.
+• Fix: queue requests; local fallback content.
+• You learn: offline‑first UX.
+
+PII in logs
+• Simulate: log raw transcripts.
+• Fix: redact by default; opt‑in analytics.
+• You learn: privacy discipline.
+
+Exit check: Pull network/kill tokens—app degrades gracefully.
+
+Lab 6 — Devices, Builds & Release (real‑world friction)
+Goal: it runs everywhere, reliably.
+
+Expo Go vs Custom Dev Client mismatch
+• Simulate: use a native STT lib that Expo Go can’t load.
+• Fix: custom dev client; document managed vs bare.
+• You learn: Expo architecture.
+
+iOS/Android permission strings missing
+• Simulate: omit NSMicrophoneUsageDescription, etc.
+• Fix: add to app.json; test review flows.
+• You learn: store compliance.
+
+Audio routing quirks (BT headset)
+• Simulate: switch between speaker/earbuds during a turn.
+• Fix: respond to route change events; reinit session.
+• You learn: audio session handling.
+
+Env vars missing in prod
+• Simulate: dev works, prod can’t reach STT.
+• Fix: EAS secrets + runtime config.
+• You learn: build‑time vs runtime configuration.
+
+ABI/SDK upgrade breakage
+• Simulate: bump Expo SDK; native dep breaks.
+• Fix: lockfile, upgrade guide, incremental test matrix.
+• You learn: upgrade strategy.
+
+Exit check: Same behavior on an older Android + new iPhone + BT earbuds.
+
+How to run the dojo (fast)
+Timebox: 6 weeks, one lab per week (or compress to 2–3 if you’re sprinting).
+
+For every bug: write a 3‑line log: Symptom → Root cause → Fix. Keep repro steps.
+
+Track metrics: first‑audio latency, interrupt stop time, WER on a 50‑phrase Hebrew set, crash‑free sessions.
+
+Lock in learning: after each lab, extract 2–3 reusable utilities (e.g., useBargeIn(), normalizeHebrew(), usePersistentProgress()).
+
+If you want, I can turn this into a one‑page checklist or a tiny Expo template that includes toggles to spawn each bug so you can practice fixing them.
