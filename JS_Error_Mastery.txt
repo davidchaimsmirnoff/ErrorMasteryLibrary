@@ -183,8 +183,10 @@ These are parsing errors — they prevent your code from running.
 
 	6.	Arrow function misformatted
 → let f = => 5; → ❌ Unexpected token ‘=>’
+
 	7.	Invalid variable name
 → let 123abc = 9; → ❌ Invalid or unexpected token
+
 	8.	Reserved word as variable name
 → let let = 5; → ❌ Unexpected token ‘let’
 
