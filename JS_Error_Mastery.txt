@@ -196,7 +196,7 @@ These are parsing errors — they prevent your code from running.
 
 These happen when you try to use something that isn’t declared or accessible.
 	9.	console.log(foo);
-→ ❌ ReferenceError: foo is not defined
+→ ❌ ReferenceError: foo is not defined ✅
 
 	10.	TDZ: console.log(a); let a = 1;
 → ❌ Cannot access ‘a’ before initialization
