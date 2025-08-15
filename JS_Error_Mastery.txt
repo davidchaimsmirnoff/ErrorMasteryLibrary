@@ -199,7 +199,7 @@ These happen when you try to use something that isn’t declared or accessible.
 → ❌ ReferenceError: foo is not defined ✅
 
 	10.	TDZ: console.log(a); let a = 1;
-→ ❌ Cannot access ‘a’ before initialization
+→ ❌ Cannot access ‘a’ before initialization ✅
 
 	11.	Misspelled variable
 → userName vs usrName
