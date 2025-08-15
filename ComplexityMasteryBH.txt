@@ -1302,3 +1302,7 @@ That’s why you can’t give a universal “X ways per rule” — you can only
 If you want, I can pick one specific grammar rule from the spec and actually walk through how many break cases you could enumerate if you limit nesting and size — so you can see how the number explodes.
 
 Do you want me to do that?
+
+
+
+![1stImage](images/1image.jpg)
