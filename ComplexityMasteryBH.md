@@ -8,7 +8,7 @@ can you just writ them here though??
 ChatGPT said:
 
 Totally—800 in one message would blow past the limit, so here are the first 200 minimal snippets (10 categories × 20 each). Every line should trigger a SyntaxError: Unexpected token … (or similar) at parse time. Copy-paste one line at a time into Node or your browser console.
-
+```
 1) Arrays: missing comma between elements (20)
 // 1-20 array_missing_comma
 [1 2];
@@ -1078,7 +1078,7 @@ Or I can re-bundle all 800 into one giant .js file so you can run them in Node a
 Do you want the answer key or the bundled JS file next?
 
 
-
+```
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 
