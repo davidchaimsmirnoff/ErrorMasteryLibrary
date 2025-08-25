@@ -7,7 +7,7 @@ Short answer: if you deliberately recreate and fix about 25 distinct error patte
 Here’s a tight roadmap you can follow:
 
 Milestones
-
+'''
 Level 1 (12 errors): you can run locally on device/simulator and fix common Metro hiccups.
 
 Level 2 (25 errors): you handle navigation, permissions, networking, assets, Expo Go limits, and config pitfalls.
@@ -95,3 +95,5 @@ Fix: apply the minimal, correct change.
 Note: write a 2–3 line “symptom → cause → fix” card.
 
 If you want, I can spin up a compact checklist with 25 mini “break & fix” drills (each with how to break, expected error message, and fix steps).
+
+'''
