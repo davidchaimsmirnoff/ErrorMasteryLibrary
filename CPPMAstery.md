@@ -118,5 +118,49 @@ Then, graphics basics (D3D11 + shaders).
 
 Then, specific features (mask, capture, blur).
 
+
+Here’s the clean, numbered ladder of small apps to build on the way to the full desktop blur tool:
+
+Minimal overlay window
+— Fullscreen, borderless, always-on-top; toggle click-through (edit vs pass-through).
+
+D3D11 init & render loop
+— Create device/swapchain; clear screen each frame; handle resize.
+
+Fullscreen triangle & texture sampling
+— Draw a full-screen triangle; sample a test texture in a pixel shader.
+
+Brush/Eraser mask (R8) + GPU upload
+— Paint into a CPU R8 mask; upload to a GPU texture every frame.
+
+Desktop capture (Desktop Duplication)
+— Show the live desktop feed inside your overlay (AcquireNextFrame → ReleaseFrame).
+
+Masked blur composite (baseline)
+— Simple 9-tap blur; output = lerp(original, blurred, mask).
+
+Separable blur (performance)
+— Horizontal then vertical passes (Gaussian/box) with ping-pong render targets.
+
+Mask at half/quarter res + dirty tiles
+— Keep mask lower-res; bilinear upscale in shader; upload only changed tiles.
+
+UX tools & hotkeys
+— Brush size/strength, blur radius, clear/save/load mask; rectangle stickers (move/resize).
+
+Multi-monitor support
+— One overlay window + capture stream per display; independent blur regions.
+
+Robustness & color correctness
+— Handle device-lost, DPI/display changes, sleep/wake; sRGB/HDR sanity toggles.
+
+(Optional) Per-app Present hook build
+— Hook IDXGISwapChain::Present/ResizeBuffers for a target app you own; share the mask.
+
+(Optional) macOS backend
+— ScreenCaptureKit capture + Metal (MPS Gaussian blur) + borderless topmost window.
+
+If you want, I’ll package 1–3 as a starter repo so you can begin at step 4 (mask painting)
+
 By the time you reach Project 9, you’ll already have the core blur overlay working 🎉.
 Projects 10–14 are about making it fast, robust, and cross-platform.
