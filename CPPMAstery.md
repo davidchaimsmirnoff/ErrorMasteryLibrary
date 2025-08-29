@@ -15,14 +15,17 @@ int main() {
 
 ✅ Done when: it prints "Hello, world!" in a terminal.
 
-Project 2: Basic Windows App (blank window)
+
+
+Project 2: Basic Windows App (blank window) ✅
 
 Learn: how to create a Win32 window (no graphics yet).
 
 Code: just WinMain, WndProc, CreateWindowEx, message loop.
 ✅ Done when: A blank resizable window pops up.
 
-Project 3: Transparent overlay window
+
+Project 3: Transparent overlay window✅
 
 Learn: Win32 extended window styles.
 
@@ -30,6 +33,8 @@ Goal: Fullscreen, borderless, always-on-top window.
 
 Add WS_EX_LAYERED | WS_EX_TRANSPARENT → click-through toggle with a key.
 ✅ Done when: Your window covers the screen, but you can still click apps underneath.
+
+
 
 Project 4: Drawing a color (D3D11 basics)
 
