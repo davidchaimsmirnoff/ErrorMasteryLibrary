@@ -40,7 +40,7 @@ Add WS_EX_LAYERED | WS_EX_TRANSPARENT → click-through toggle with a key.
 --------------------------------------------------------------------------------
 
 
-Project 4: Drawing a color (D3D11 basics)
+Project 4: Drawing a color (D3D11 basics) ✅
 
 Learn: initialize Direct3D 11.
 
