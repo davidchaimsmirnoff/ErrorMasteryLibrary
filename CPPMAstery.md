@@ -1,6 +1,6 @@
 
 Beginner-Friendly Project Ladder (C++ → Blur Overlay)
-Project 1: Hello World (console)
+Project 1: Hello World (console) ✅ 
 
 Learn: how to write, compile, and run C++ code.
 
